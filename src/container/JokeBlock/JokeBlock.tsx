@@ -21,7 +21,7 @@ const JokeBlock = () => {
     <div className="container">
       <h2>Jokes</h2>
       <JokeItem text={joke} />
-      <button className="btn btn-primary" onClick={fetchurl}>New jokes</button>
+      <button className="btn btn-primary" onClick={fetchurl}>Get new jokes</button>
     </div>
   );
 };
