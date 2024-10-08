@@ -5,15 +5,15 @@ const JokeBlock = () => {
   const [joke, setJoke] = useState<string>('')
 
   const url = 'https://api.chucknorris.io/jokes/random';
+  const fetchurl = async ()=>{
+    const response = await fetch(url);
+    if(response.ok){
+      const posts = await response.json() ;
+      setJoke(posts.value);
+    }
+  };
 
   useEffect(() =>{
-    const fetchurl = async ()=>{
-      const response = await fetch(url);
-      if(response.ok){
-        const posts = await response.json() ;
-        setJoke(posts.value);
-      }
-    };
     void fetchurl()
   }, [])
 
@@ -21,7 +21,7 @@ const JokeBlock = () => {
     <div className="container">
       <h2>Jokes</h2>
       <JokeItem text={joke} />
-      <button className="btn btn-primary">New jokes</button>
+      <button className="btn btn-primary" onClick={fetchurl}>New jokes</button>
     </div>
   );
 };
