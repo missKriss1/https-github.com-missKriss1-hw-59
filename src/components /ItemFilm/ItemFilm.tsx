@@ -4,17 +4,14 @@ import React from "react";
 interface Props {
   film: BlockFilm;
   delateByInout(id: string): void;
-  editingByInput( id : string, newText:string): void;
-
+  editingByInput(id: string, newText: string): void;
 }
 
-const ItmeFilm: React.FC<Props> = React.memo(({ film, delateByInout, editingByInput }) => {
-    const textNew = (e: React.ChangeEvent<HTMLInputElement>) =>{
-      editingByInput(
-        film.id,
-        e.target.value
-      );
-    }
+const ItmeFilm: React.FC<Props> = React.memo(
+  ({ film, delateByInout, editingByInput }) => {
+    const textNew = (e: React.ChangeEvent<HTMLInputElement>) => {
+      editingByInput(film.id, e.target.value);
+    };
     return (
       <div className="row mb-3">
         <input

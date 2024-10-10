@@ -3,20 +3,7 @@ import type { BlockFilm } from "../../types";
 import ItemFilm from "../../components /ItemFilm/ItemFilm.tsx";
 
 const BlockFilm = () => {
-  const [posts, setPosts] = useState<BlockFilm[]>([
-    {
-      id: "1",
-      text: "Move 1",
-    },
-    {
-      id: "2",
-      text: "Move 2",
-    },
-    {
-      id: "3",
-      text: "Move 3",
-    },
-  ]);
+  const [posts, setPosts] = useState<BlockFilm[]>([]);
   const [inputPosts, setInputPosts] = useState("");
 
   const addNewPost = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,23 +18,24 @@ const BlockFilm = () => {
     }
   };
 
-  const editingByInput = (id: string, newText:string) => {
-    setPosts((prevState) =>{
-      return prevState.map((post)=>{
-        if(post.id === id){
-          return{
+  const editingByInput = (id: string, newText: string) => {
+    setPosts((prevState) => {
+      return prevState.map((post) => {
+        if (post.id === id) {
+          return {
             ...post,
             text: newText,
-          }
+          };
         }
         return post;
-      })
-    } )
-  }
+      });
+    });
+  };
 
   const delateByInout = (id: string) => {
     setPosts((prevState) => prevState.filter((post) => post.id !== id));
   };
+
   return (
     <div className="container mt-4">
       <form onSubmit={addNewPost}>
@@ -58,19 +46,28 @@ const BlockFilm = () => {
             value={inputPosts}
             onChange={(e) => setInputPosts(e.target.value)}
           />
-          <button className="btn btn-primary col-2 w-auto ms-3" type="submit">
+          <button
+            className="btn btn-primary col-2 w-auto ms-3"
+            type="submit">
             Add
           </button>
         </div>
       </form>
-      <h3>To watch list</h3>
-      {posts.length === 0 ? <p>There are no movies.</p>:
+      <h3 >To watch list</h3>
+      {posts.length === 0 ? (
+        <p>There are no movies.</p>
+      ) : (
         <>
           {posts.map((post) => (
-            <ItemFilm key={post.id} film={post} delateByInout={delateByInout} editingByInput={editingByInput}/>
+            <ItemFilm
+              key={post.id}
+              film={post}
+              delateByInout={delateByInout}
+              editingByInput={editingByInput}
+            />
           ))}
         </>
-      }
+      )}
     </div>
   );
 };

@@ -1,27 +1,29 @@
-import { useEffect, useState } from 'react';
-import JokeItem from '../../components /JokeItem/JokeItem.tsx';
+import { useEffect, useState } from "react";
+import JokeItem from "../../components /JokeItem/JokeItem.tsx";
 
 const JokeBlock = () => {
-  const [joke, setJoke] = useState<string>('')
+  const [joke, setJoke] = useState<string>("");
 
-  const url = 'https://api.chucknorris.io/jokes/random';
-  const fetchurl = async ()=>{
+  const url = "https://api.chucknorris.io/jokes/random";
+  const fetchurl = async () => {
     const response = await fetch(url);
-    if(response.ok){
-      const posts = await response.json() ;
+    if (response.ok) {
+      const posts = await response.json();
       setJoke(posts.value);
     }
   };
 
-  useEffect(() =>{
-    void fetchurl()
-  }, [])
+  useEffect(() => {
+    void fetchurl();
+  }, []);
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <h2>Jokes</h2>
       <JokeItem text={joke} />
-      <button className="btn btn-primary" onClick={fetchurl}>Get new jokes</button>
+      <button className="btn btn-primary" onClick={fetchurl}>
+        Get new jokes
+      </button>
     </div>
   );
 };
